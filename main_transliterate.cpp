@@ -124,19 +124,9 @@ int main()
 			rusToEngTransliterationAlphabet[i + minisculeLetterStart][j] = std::tolower(rusToEngTransliterationAlphabet[i][j]);
 
 
-	//std::locale loc = std::get ;
-	//auto tempCharacter = boost::locale::to_lower( rusToEngTransliterationAlphabet[0][0], loc ) ;
-	//std::locale::
-	//std::iostream::basic_istream inputFile("test.bib");
-	//std::fstream::basic_fstream inputFile("test.bib");
-	//std::fstream::basic_istream inputFile("test.bib");
 
-	//std::iostream::basic_ostream outputFile("test2.bib");
-	//std::fstream::basic_ostream outputFile("test2.bib");
-
-	//std::ifstream inputFile("test.bib", std::ios::in | std::ios::binary);
-	std::ifstream inputFile("bibfile.bib", std::ios::in | std::ios::binary);
-	std::ofstream outputFile("test2.bib", std::ios::out | std::ios::trunc | std::ios::binary);
+	std::ifstream inputFile("input.txt", std::ios::in | std::ios::binary);
+	std::ofstream outputFile("output.txt", std::ios::out | std::ios::trunc | std::ios::binary);
 
 	// utf8 symbols may take up to 6 bytes, but Russian symbols are 2 bytes.
 	char character[2];//, chraracterTemp, *firstPartOfChar, *secondPartOfChar, *thirdPartOfChar, *fourthPartOfChar;
@@ -154,9 +144,6 @@ int main()
 	char utf8TwoByteCharacterTemplateFirstPart = 0b11000000;
 	char utf8TwoByteCharacterTemplateSecondPart = 0b10000000;
 
-
-	//for( int k = 0; k < 10 ; ++k)
-		//inputFile.read(firstPartOfChar, 1);
 
 	i = 0;
 	bool is_utf8 = true;
@@ -187,38 +174,9 @@ int main()
 					{
 						inputFile.read(character + 1, 1);
 
-						//int tempChar = 0;
-						//int testInt = 42 << 8;
-						//int tempCharInt1, tempCharInt2; char tempChar2;
-						//tempCharInt1 = character[0];
-						///tempChar2 = character[0];
-						//tempCharInt2 = tempChar2;
-						//int tempChar4 = *(character + 0);
-						///int tempChar2 = tempChar << 8;
-						//int tampChar3 = *character;
-						//auto temp5 = ((character[0])<<8) + character[1];
-						//auto temp6 = (character[0]) << 8;
-						//auto temp7 = *(character + 0) << 8;
-						//tempChar2 <<= 8;
-						//tempChar2 <<= 8;
-						//tempChar2 += character[1] ;// << 8;//+ character[1];
-						//auto test2 = test + character[1];
-						//i = FindCharacterIndexInArray( ((character[0])<<8) + character[1], rusAlphabet, 66);
-						//i = FindCharacterIndexInArray( (static_cast<char16_t>(character[0])<<8) + character[1], rusAlphabet, 66);
-						//i = FindCharacterIndexInArray( (tempChar <<  8) + character[1], rusAlphabet, 66);
-						//char tempChar;
-						//tempChar = static_cast<int>(character[0]);
-
-
-
-						//char16_t tempCharWithShift1 = static_cast<char16_t>(character[0]) << 8;
-						//char16_t tempCharWithShift2 = static_cast<char16_t>(character[1]);
-						//tempCharWithShift2 &= maskForSecondByte;
 						char16_t tempChar1, tempChar2;//, tempChar3;
 
-
 						tempChar2 = (static_cast<char16_t>(character[0]) << 8) + (static_cast<char16_t>(character[1]) & maskForSecondByte); //tempCharWithShift1 + tempCharWithShift2;
-						//tempChar = (static_cast<int>(character[0]) << 8) + character[1];
 						std::memcpy( &tempChar1, character, 2);
 
 						i = FindCharacterIndexInArray( tempChar2, rusAlphabet, 66);
@@ -260,7 +218,6 @@ int main()
 
 		outputFile.write(message, 37);
 	};
-	//inputFile.read(firstPartOfChar, 1);
 
 	inputFile.close();
 	outputFile.flush();
